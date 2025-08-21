@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+public class LesothoWaterCo {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int choice;
+        do {
+            System.out.println("\nWelcome");
+            System.out.println("1. Cuboid Tank");
+            System.out.println("2. Cylindrical Tank");
+            System.out.println("3. Spherical Tank");
+            System.out.print("Select your choice: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Input incorrect. Please select a number between 1 and 3.");
+                scanner.next();
+            }
+
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    volumeCuboid(scanner);
+                    break;
+                case 2:
+                    volumeCylinder(scanner);
+                    break;
+                case 3:
+                    volumeSphere(scanner);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, or 3.");
+            }
+
+            System.out.print("\nDo you want to calculate again? (1 for Yes / 0 for No): ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Input incorrect. Please enter 1 or 0.");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+
+        } while (choice == 1);
+
+        System.out.println("Thank you for using LesothoWaterCo!");
+        scanner.close();
+    }
+
+  
+    public static void volumeCuboid(Scanner scanner) {
+        System.out.print("Enter length: ");
+        double length = scanner.nextDouble();
+        System.out.print("Enter width: ");
+        double width = scanner.nextDouble();
+        System.out.print("Enter height: ");
+        double height = scanner.nextDouble();
+
+        double volume = length * width * height;
+        System.out.printf("Volume of Cuboid Tank = %.2f%n", volume);
+        classifyVolume(volume);
+    }
+
+   
+    public static void volumeCylinder(Scanner scanner) {
+        System.out.print("Enter radius: ");
+        double radius = scanner.nextDouble();
+        System.out.print("Enter height: ");
+        double height = scanner.nextDouble();
+
+        double volume = Math.PI * radius * radius * height;
+        System.out.printf("Volume of Cylindrical Tank = %.2f%n", volume);
+        classifyVolume(volume);
+    }
+
+   
+    public static void volumeSphere(Scanner scanner) {
+        System.out.print("Enter radius: ");
+        double radius = scanner.nextDouble();
+
+        double volume = (4.0 / 3.0) * Math.PI * Math.pow(radius, 3);
+        System.out.printf("Volume of Spherical Tank = %.2f%n", volume);
+        classifyVolume(volume);
+    }
+
+  
+    public static void classifyVolume(double volume) {
+        if (volume < 1000) {
+            System.out.println("Classification: SMALL Tank");
+        } else if (volume <= 5000) {
+            System.out.println("Classification: MEDIUM Tank");
+        } else {
+            System.out.println("Classification: LARGE Tank");
+        }
+    }
+}
